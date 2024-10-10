@@ -42,7 +42,7 @@ public class OkeyGame {
      * it should return the toString method of the tile so that we can print what we picked
      */
     public String getLastDiscardedTile() {
-        return null;
+        return lastDiscardedTile.toString();
     }
     //ismet
     /*
@@ -50,8 +50,25 @@ public class OkeyGame {
      * that tile is no longer in the tiles array (this simulates picking up the top tile)
      * it should return the toString method of the tile so that we can print what we picked
      */
+
+     //DESTEDEKİ TİLELERI DENETLEMEK İÇİN EN ÜSTTEKİ ALINDIKTAN SONRA DİĞERLERİNİ BİR SIRA KAYDIRIP YENİ BİR ARRAYE ATABİLİRİZ.
+     //AYBÜKE SEN DE DİSTRİBUTE FONKSİYONUNDA BENİMKİ GİBİ BİR MANTIK KULLAN YOKSA BENİMKİ ÇALIŞMAZ
+
     public String getTopTile() {
-        return null;
+        if (tiles.length == 0) {
+            return "No tiles left";
+        }
+
+        Tile toBeReturned = tiles[0];
+        Tile[] newTiles = new Tile[tiles.length - 1];
+
+        for (int i = 0; i < tiles.length - 1; i++) {
+            tiles[i] = tiles[i+1];
+            newTiles[i] = tiles[i + 1];
+        }
+
+        this.tiles = newTiles;
+        return toBeReturned.toString();
     }
     //aybüke
     /*
@@ -126,5 +143,4 @@ public class OkeyGame {
             players[index] = new Player(name);
         }
     }
-
 }
