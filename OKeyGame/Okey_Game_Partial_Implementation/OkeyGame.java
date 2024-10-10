@@ -25,7 +25,7 @@ public class OkeyGame {
             }
         }
     }
-
+    //aybüke
     /*
      * TODO: distributes the starting tiles to the players
      * player at index 0 gets 15 tiles and starts first
@@ -35,32 +35,49 @@ public class OkeyGame {
     public void distributeTilesToPlayers() {
 
     }
-
+    //ismet
     /*
      * TODO: get the last discarded tile for the current player
      * (this simulates picking up the tile discarded by the previous player)
      * it should return the toString method of the tile so that we can print what we picked
      */
     public String getLastDiscardedTile() {
-        return null;
+        return lastDiscardedTile.toString();
     }
-
+    //ismet
     /*
      * TODO: get the top tile from tiles array for the current player
      * that tile is no longer in the tiles array (this simulates picking up the top tile)
      * it should return the toString method of the tile so that we can print what we picked
      */
-    public String getTopTile() {
-        return null;
-    }
 
+     //DESTEDEKİ TİLELERI DENETLEMEK İÇİN EN ÜSTTEKİ ALINDIKTAN SONRA DİĞERLERİNİ BİR SIRA KAYDIRIP YENİ BİR ARRAYE ATABİLİRİZ.
+     //AYBÜKE SEN DE DİSTRİBUTE FONKSİYONUNDA BENİMKİ GİBİ BİR MANTIK KULLAN YOKSA BENİMKİ ÇALIŞMAZ
+
+    public String getTopTile() {
+        if (tiles.length == 0) {
+            return "No tiles left";
+        }
+
+        Tile toBeReturned = tiles[0];
+        Tile[] newTiles = new Tile[tiles.length - 1];
+
+        for (int i = 0; i < tiles.length - 1; i++) {
+            tiles[i] = tiles[i+1];
+            newTiles[i] = tiles[i + 1];
+        }
+
+        this.tiles = newTiles;
+        return toBeReturned.toString();
+    }
+    //aybüke
     /*
      * TODO: should randomly shuffle the tiles array before game starts
      */
     public void shuffleTiles() {
 
     }
-
+    //eren
     /*
      * TODO: check if game still continues, should return true if current player
      * finished the game, use isWinningHand() method of Player to decide
@@ -68,7 +85,7 @@ public class OkeyGame {
     public boolean didGameFinish() {
         return false;
     }
-
+    //eren
     /*
      * TODO: Pick a tile for the current computer player using one of the following:
      * - picking from the tiles array using getTopTile()
@@ -79,7 +96,7 @@ public class OkeyGame {
     public void pickTileForComputer() {
 
     }
-
+    //emre
     /*
      * TODO: Current computer player will discard the least useful tile.
      * this method should print what tile is discarded since it should be
@@ -89,7 +106,7 @@ public class OkeyGame {
     public void discardTileForComputer() {
 
     }
-
+    //emre
     /*
      * TODO: discards the current player's tile at given index
      * this should set lastDiscardedTile variable and remove that tile from
@@ -126,5 +143,4 @@ public class OkeyGame {
             players[index] = new Player(name);
         }
     }
-
 }
