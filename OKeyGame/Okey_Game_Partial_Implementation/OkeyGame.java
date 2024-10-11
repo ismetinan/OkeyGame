@@ -83,6 +83,9 @@ public class OkeyGame {
      * finished the game, use isWinningHand() method of Player to decide
      */
     public boolean didGameFinish() {
+       if (players[currentPlayerIndex].isWinningHand()){
+        return true;
+       }
         return false;
     }
     //eren
@@ -94,6 +97,20 @@ public class OkeyGame {
      * the current status. Print whether computer picks from tiles or discarded ones.
      */
     public void pickTileForComputer() {
+        boolean useful = false;
+        Tile[] hand = new Tile[players[currentPlayerIndex].getTiles().length];
+        hand = players[currentPlayerIndex].getTiles();
+        for(int i=0;i<players[currentPlayerIndex].getTiles().length;i++){
+            if(hand[i].canFormChainWith(lastDiscardedTile)){
+                useful = true;
+            }
+        }
+        if(useful){
+            getLastDiscardedTile();
+        }
+        else{
+            getTopTile();
+        }
 
     }
     //emre
