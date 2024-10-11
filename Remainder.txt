@@ -1,0 +1,7 @@
+
+You will submit your reflections about this homework individually. Submit “Reflections.txt” under this assignment, 
+where you write at least 100 words of reflections about working on this homework: 
+Was it easy to work on a partial implementation? Were there any difficulties working as a team? 
+What was your role in the team work? Each person will submit their reflections individually.
+
+After finishing the code that you have to do, do not forget to write your reflections.
