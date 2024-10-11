@@ -113,7 +113,7 @@ public class OkeyGame {
         }
 
     }
-    //emre
+   //emre
     /*
      * TODO: Current computer player will discard the least useful tile.
      * this method should print what tile is discarded since it should be
@@ -121,7 +121,26 @@ public class OkeyGame {
      * the single tiles and tiles that contribute to the smallest chains.
      */
     public void discardTileForComputer() {
+        Player currentPlayer = players[currentPlayerIndex];
+        Tile[] playerTiles = currentPlayer.getTiles();
+    
+    
+    for (int i = 0; i < playerTiles.length; i++) {
+        for (int j = i + 1; j < playerTiles.length; j++) {
+            if (playerTiles[i] != null && playerTiles[i].equals(playerTiles[j])) {
 
+               discardTile(i);
+               displayDiscardInformation();
+            }
+        }
+    }
+
+    for (int i = 0; i < playerTiles.length; i++) {
+        if (playerTiles[i] != null) {
+          discardTile(i);
+          displayDiscardInformation();
+        }
+    }
     }
     //emre
     /*
@@ -130,7 +149,13 @@ public class OkeyGame {
      * that player's tiles
      */
     public void discardTile(int tileIndex) {
+       
+            Player currentPlayer = players[currentPlayerIndex];
+            Tile[] playerTiles = currentPlayer.getTiles();  
+        
 
+            lastDiscardedTile = playerTiles[tileIndex];
+            playerTiles[tileIndex] = null;  
     }
 
     public void displayDiscardInformation() {
