@@ -42,7 +42,6 @@ public class OkeyGame {
      * it should return the toString method of the tile so that we can print what we picked
      */
     public String getLastDiscardedTile() {
-        players[currentPlayerIndex].addTile(lastDiscardedTile);
         return lastDiscardedTile.toString();
     }
     //ismet
@@ -69,7 +68,6 @@ public class OkeyGame {
         }
 
         this.tiles = newTiles;
-        players[currentPlayerIndex].addTile(toBeReturned);
         return toBeReturned.toString();
     }
     //aybüke
