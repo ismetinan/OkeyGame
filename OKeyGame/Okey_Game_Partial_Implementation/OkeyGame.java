@@ -1,3 +1,6 @@
+import java.util.ArrayList;
+import java.util.Random;
+
 public class OkeyGame {
 
     Player[] players;
@@ -33,6 +36,34 @@ public class OkeyGame {
      * this method assumes the tiles are already shuffled
      */
     public void distributeTilesToPlayers() {
+        shuffleTiles();
+        Player[] players = new Player[4];
+        Tile[] restOfTiles = new Tile[55];
+       
+        for(int i=0; i<112; i++){
+            int j = 0;
+            if(i<15){
+            players[currentPlayerIndex].addTile(tiles[i]);
+            currentPlayerIndex++;
+            }
+            else if(i>=15&&i<29){
+            players[currentPlayerIndex].addTile(tiles[i]);
+            currentPlayerIndex++;
+            }
+            else if(i>=29&&i<43){
+            players[currentPlayerIndex].addTile(tiles[i]);
+            currentPlayerIndex++;
+            }
+            else if(i>=43&&i<57){
+            players[currentPlayerIndex].addTile(tiles[i]);
+            currentPlayerIndex++;
+            }
+            else{
+               restOfTiles[j]=tiles[i];
+               j++;
+            }
+        }
+            
 
     }
     //ismet
@@ -77,6 +108,24 @@ public class OkeyGame {
      * TODO: should randomly shuffle the tiles array before game starts
      */
     public void shuffleTiles() {
+        createTiles();
+        Tile[] tempTiles = new Tile[112];
+        Random rand = new Random();
+        ArrayList<Integer> places = new ArrayList<Integer>();
+
+        while(places.size()<112){
+            int temp = rand.nextInt(0,113);
+            if(!places.contains(temp)){
+                places.add(temp);     
+            }
+        }
+
+        for(int i=0; i<112; i++){
+            int place = places.get(i);
+            tempTiles[i]=tiles[place];
+        }
+
+        tiles=tempTiles;
 
     }
     //eren
