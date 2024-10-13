@@ -186,7 +186,7 @@ public class OkeyGame {
     
         for (int i = 0; i < playerTiles.length && !discarded; i++) {
             for (int j = i + 1; j < playerTiles.length; j++) {
-                if (playerTiles[i] != null && playerTiles[i].equals(playerTiles[j])) {
+                if (playerTiles[i] != null && playerTiles[i].compareTo(playerTiles[j])==0) {
                     discardTile(i);
                     discarded = true;
                     j =  playerTiles.length;
@@ -221,7 +221,9 @@ public class OkeyGame {
             lastDiscardedTile = playerTiles[tileIndex];
     
             for (int i = tileIndex; i < playerTiles.length - 1; i++) {
-                playerTiles[i] = playerTiles[i+1];
+                if(i<playerTiles.length-2){
+                    playerTiles[i] = playerTiles[i+1];
+                }
             } 
             
     }
