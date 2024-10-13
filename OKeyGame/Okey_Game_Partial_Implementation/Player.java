@@ -1,3 +1,5 @@
+import java.util.Arrays;
+
 public class Player {
     String playerName;
     Tile[] playerTiles;
@@ -17,11 +19,11 @@ public class Player {
             return null;
         }
         Tile removedTile=playerTiles[index];
-            for(int i=index;i<numberOfTiles;i++){
+            for(int i=index;i<numberOfTiles-1;i++){
                 playerTiles[i]=playerTiles[i+1];
 
             }
-            playerTiles[numberOfTiles-1]=null;
+            playerTiles=Arrays.copyOf(playerTiles, 14);
             numberOfTiles--;
             return removedTile;
 

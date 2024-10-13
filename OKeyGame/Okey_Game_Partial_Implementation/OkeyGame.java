@@ -219,12 +219,9 @@ public class OkeyGame {
         
 
             lastDiscardedTile = playerTiles[tileIndex];
-    
-            for (int i = tileIndex; i < playerTiles.length - 1; i++) {
-                if(i<playerTiles.length-2){
-                    playerTiles[i] = playerTiles[i+1];
-                }
-            } 
+            players[currentPlayerIndex].getAndRemoveTile(tileIndex);
+           
+
             
     }
 
