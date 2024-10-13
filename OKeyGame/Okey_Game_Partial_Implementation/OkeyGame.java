@@ -40,36 +40,38 @@ public class OkeyGame {
         shuffleTiles();
         Tile[] restOfTiles = new Tile[55];
        currentPlayerIndex = 0;
+       int j = 0;
         for(int i=0; i<112; i++){
-            int j = 0;
+            
             if(i<15){
-            players[currentPlayerIndex].addTile(tiles[i]);
+            players[currentPlayerIndex].preAddTile(tiles[i]);
             if(i==14){
                 currentPlayerIndex++;
             }
             }
             else if(i>=15&&i<29){
-            players[currentPlayerIndex].addTile(tiles[i]);
+            players[currentPlayerIndex].preAddTile(tiles[i]);
             if(i==28){
                 currentPlayerIndex++;
             }
             }
             else if(i>=29&&i<43){
-            players[currentPlayerIndex].addTile(tiles[i]);
+            players[currentPlayerIndex].preAddTile(tiles[i]);
             if(i==42){
                 currentPlayerIndex++;
             }
             }
             else if(i>=43&&i<57){
-            players[currentPlayerIndex].addTile(tiles[i]);
+            players[currentPlayerIndex].preAddTile(tiles[i]);
             }
             else{
                restOfTiles[j]=tiles[i];
                j++;
                currentPlayerIndex = 0;
             }
-        }
             
+        }
+        this.tiles = restOfTiles;
 
     }
     //ismet
@@ -102,7 +104,7 @@ public class OkeyGame {
 
         for (int i = 0; i < tiles.length - 1; i++) {
             tiles[i] = tiles[i+1];
-            newTiles[i] = tiles[i + 1];
+            newTiles[i] = tiles[i+1];
         }
 
         this.tiles = newTiles;
@@ -164,12 +166,12 @@ public class OkeyGame {
             }
         }
         if(useful){
-            getLastDiscardedTile();
+            System.out.println("Picked from discard: " + getLastDiscardedTile());
         }
         else{
-            getTopTile();
+            System.out.println("Picked from top: " + getTopTile());
         }
-        System.out.print(Arrays.toString(players[currentPlayerIndex].getTiles()));
+        
 
     }
    //emre
@@ -202,7 +204,6 @@ public class OkeyGame {
                 }
             }
         }
-        System.out.print(Arrays.toString(players[currentPlayerIndex].getTiles()));
 
    
     }
@@ -215,15 +216,9 @@ public class OkeyGame {
     public void discardTile(int tileIndex) {
        
             Player currentPlayer = players[currentPlayerIndex];
-            Tile[] playerTiles = currentPlayer.getTiles();  
-        
-
-            lastDiscardedTile = playerTiles[tileIndex];
-    
-            for (int i = tileIndex; i < playerTiles.length - 1; i++) {
-                playerTiles[i] = playerTiles[i+1];
-            } 
-            
+            lastDiscardedTile = currentPlayer.getAndRemoveTile(tileIndex);
+            System.out.println(lastDiscardedTile);
+            System.out.println(Arrays.toString(currentPlayer.playerTiles));
     }
 
     public void displayDiscardInformation() {

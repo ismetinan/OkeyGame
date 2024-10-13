@@ -1,3 +1,6 @@
+import java.util.Arrays;
+import java.util.Comparator;
+
 public class Player {
     String playerName;
     Tile[] playerTiles;
@@ -8,32 +11,61 @@ public class Player {
         playerTiles = new Tile[15]; // there are at most 15 tiles a player owns at any time
         numberOfTiles = 0; // currently this player owns 0 tiles, will pick tiles at the beggining of the game
     }
+    
 //EGE player sınıfı
     /*
      * TODO: removes and returns the tile in given index
      */
     public Tile getAndRemoveTile(int index) {
-        if(index==0||index>numberOfTiles){
+        Tile[] newPlayerTiles = new Tile[14];
+        if (index < 0 || index > numberOfTiles) {
             return null;
         }
-        Tile removedTile=playerTiles[index];
-            for(int i=index;i<numberOfTiles;i++){
-                playerTiles[i]=playerTiles[i+1];
+        Tile removedTile = playerTiles[index];
+        for (int i = index; i < numberOfTiles - 1; i++) {
+            playerTiles[i] = playerTiles[i + 1];
 
-            }
-            playerTiles[numberOfTiles-1]=null;
-            numberOfTiles--;
-            return removedTile;
+        }
+        newPlayerTiles = Arrays.copyOf(playerTiles, 14);
+        numberOfTiles--;
+        this.playerTiles = newPlayerTiles;
+        return removedTile;
 
     }
 
-    /*
-     * TODO: adds the given tile to the playerTiles in order
-     * should also update numberOfTiles accordingly.
-     * make sure playerTiles are not more than 15 at any time
-     */
+    
     public void addTile(Tile t) {
+        if (numberOfTiles >= playerTiles.length) {
+            if (numberOfTiles >= 15) {
+                System.out.println("Cannot add more tiles. Maximum limit reached.");
+                return;
+            }
+            Tile[] newPlayerTiles = new Tile[playerTiles.length + 1];
+            System.arraycopy(playerTiles, 0, newPlayerTiles, 0, playerTiles.length);
+            playerTiles = newPlayerTiles;
+        }
+        
+        playerTiles[numberOfTiles] = t;
+        numberOfTiles++;
+        
+        // Sort the hand after adding the new tile
+        sortHand();
+    }
 
+    public void sortHand() {
+        Arrays.sort(playerTiles, 0, numberOfTiles, new Comparator<Tile>() {
+            @Override
+            public int compare(Tile t1, Tile t2) {
+                if (t1 == null && t2 == null) return 0;
+                if (t1 == null) return 1;
+                if (t2 == null) return -1;
+                return t1.compareTo(t2);
+            }
+        });
+    }
+
+    public void preAddTile(Tile t) {
+        
         if(numberOfTiles<15){
             int currentIndex = 0;
         
@@ -48,7 +80,6 @@ public class Player {
                 numberOfTiles++;
                
         }
-
     }
 
     /*
@@ -117,5 +148,9 @@ public class Player {
 
     public String getName() {
         return playerName;
+    }
+    public void sortHand(Tile[] t) {
+
+        
     }
 }
