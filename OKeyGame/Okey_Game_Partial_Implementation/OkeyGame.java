@@ -65,6 +65,7 @@ public class OkeyGame {
             else{
                restOfTiles[j]=tiles[i];
                j++;
+               currentPlayerIndex = 0;
             }
         }
             
