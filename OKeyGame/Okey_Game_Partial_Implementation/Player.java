@@ -1,5 +1,3 @@
-import java.util.Arrays;
-
 public class Player {
     String playerName;
     Tile[] playerTiles;
@@ -19,11 +17,11 @@ public class Player {
             return null;
         }
         Tile removedTile=playerTiles[index];
-            for(int i=index;i<numberOfTiles-1;i++){
+            for(int i=index;i<numberOfTiles;i++){
                 playerTiles[i]=playerTiles[i+1];
 
             }
-            playerTiles=Arrays.copyOf(playerTiles, 14);
+            playerTiles[numberOfTiles-1]=null;
             numberOfTiles--;
             return removedTile;
 
@@ -39,7 +37,7 @@ public class Player {
         if(numberOfTiles<15){
             int currentIndex = 0;
         
-            while (currentIndex < numberOfTiles && playerTiles[currentIndex].compareTo(t) < 0) {
+            while (currentIndex < numberOfTiles && playerTiles[currentIndex].compareTo(t) > 0) {
             currentIndex++;
             }
                 for (int i = numberOfTiles; i > currentIndex; i--) {
@@ -68,7 +66,7 @@ public class Player {
         int chainCount = 0;
         int currentChainLength = 1;
 
-        for (int i = 1; i < numberOfTiles; i++) {
+        for (int i = 1; i < numberOfTiles-2; i++) {
 
             if (playerTiles[i].canFormChainWith(playerTiles[i - 1])) {
                 currentChainLength++;
@@ -103,7 +101,7 @@ public class Player {
 
     public void displayTiles() {
         System.out.println(playerName + "'s Tiles:");
-        for (int i = 0; i < numberOfTiles; i++) {
+        for (int i = 0; i < numberOfTiles-2; i++) {
             System.out.print(playerTiles[i].toString() + " ");
         }
         System.out.println();

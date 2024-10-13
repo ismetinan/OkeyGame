@@ -156,7 +156,7 @@ public class OkeyGame {
     public void pickTileForComputer() {
         boolean useful = false;
         Tile[] hand = new Tile[players[currentPlayerIndex].getTiles().length-1];
-        hand=Arrays.copyOf(players[currentPlayerIndex].getTiles(),players[currentPlayerIndex].getTiles().length-1);        
+        hand=Arrays.copyOf(players[currentPlayerIndex].getTiles(),players[currentPlayerIndex].getTiles().length);        
         for(int i=0;i<players[currentPlayerIndex].getTiles().length-1&&!useful;i++){
             
             if(hand[i].canFormChainWith(lastDiscardedTile)){
@@ -170,9 +170,10 @@ public class OkeyGame {
             getTopTile();
         }
         System.out.print(Arrays.toString(players[currentPlayerIndex].getTiles()));
+        
 
     }
-   //emre
+    //emre
     /*
      * TODO: Current computer player will discard the least useful tile.
      * this method should print what tile is discarded since it should be
@@ -186,7 +187,7 @@ public class OkeyGame {
     
         for (int i = 0; i < playerTiles.length && !discarded; i++) {
             for (int j = i + 1; j < playerTiles.length; j++) {
-                if (playerTiles[i] != null && playerTiles[i].compareTo(playerTiles[j])==0) {
+                if (playerTiles[i] != null && playerTiles[i].equals(playerTiles[j])) {
                     discardTile(i);
                     discarded = true;
                     j =  playerTiles.length;
@@ -213,16 +214,20 @@ public class OkeyGame {
      * that player's tiles
      */
     public void discardTile(int tileIndex) {
-       
-            Player currentPlayer = players[currentPlayerIndex];
-            Tile[] playerTiles = currentPlayer.getTiles();  
+        Player currentPlayer = players[currentPlayerIndex];
+        Tile[] playerTiles = currentPlayer.getTiles();
+    
+        lastDiscardedTile = playerTiles[tileIndex];
         
-
-            lastDiscardedTile = playerTiles[tileIndex];
-            players[currentPlayerIndex].getAndRemoveTile(tileIndex);
+        
+        for (int i = tileIndex; i < playerTiles.length - 1; i++) {
+            playerTiles[i] = playerTiles[i + 1];  
            
-
-            
+        }
+        
+    
+       
+        
     }
 
     public void displayDiscardInformation() {
