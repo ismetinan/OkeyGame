@@ -114,7 +114,7 @@ public class OkeyGame {
         ArrayList<Integer> places = new ArrayList<Integer>();
 
         while(places.size()<112){
-            int temp = rand.nextInt(0,113);
+            int temp = rand.nextInt(0,112);
             if(!places.contains(temp)){
                 places.add(temp);     
             }
