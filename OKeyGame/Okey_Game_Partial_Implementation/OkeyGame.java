@@ -153,9 +153,10 @@ public class OkeyGame {
      */
     public void pickTileForComputer() {
         boolean useful = false;
-        Tile[] hand = new Tile[players[currentPlayerIndex].getTiles().length];
-        hand = players[currentPlayerIndex].getTiles();
+        
         for(int i=0;i<players[currentPlayerIndex].getTiles().length;i++){
+            Tile[] hand = new Tile[players[currentPlayerIndex].getTiles().length];
+            hand = players[currentPlayerIndex].getTiles();
             if(hand[i].canFormChainWith(lastDiscardedTile)){
                 useful = true;
             }
