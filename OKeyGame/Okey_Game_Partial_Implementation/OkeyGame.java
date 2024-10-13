@@ -169,6 +169,7 @@ public class OkeyGame {
         else{
             getTopTile();
         }
+        System.out.print(Arrays.toString(players[currentPlayerIndex].getTiles()));
 
     }
    //emre
@@ -181,24 +182,29 @@ public class OkeyGame {
     public void discardTileForComputer() {
         Player currentPlayer = players[currentPlayerIndex];
         Tile[] playerTiles = currentPlayer.getTiles();
+        boolean discarded = false;
     
-    
-    for (int i = 0; i < playerTiles.length; i++) {
-        for (int j = i + 1; j < playerTiles.length; j++) {
-            if (playerTiles[i] != null && playerTiles[i].equals(playerTiles[j])) {
-
-               discardTile(i);
-               displayDiscardInformation();
+        for (int i = 0; i < playerTiles.length && !discarded; i++) {
+            for (int j = i + 1; j < playerTiles.length; j++) {
+                if (playerTiles[i] != null && playerTiles[i].equals(playerTiles[j])) {
+                    discardTile(i);
+                    discarded = true;
+                    j =  playerTiles.length;
+                }
             }
         }
-    }
-
-    for (int i = 0; i < playerTiles.length; i++) {
-        if (playerTiles[i] != null) {
-          discardTile(i);
-          displayDiscardInformation();
+    
+        if (!discarded) {
+            for (int i = 0; i < playerTiles.length; i++) {
+                if (playerTiles[i] != null) {
+                    discardTile(i);
+                    i = playerTiles.length;
+                }
+            }
         }
-    }
+        System.out.print(Arrays.toString(players[currentPlayerIndex].getTiles()));
+
+   
     }
     //emre
     /*
@@ -213,7 +219,11 @@ public class OkeyGame {
         
 
             lastDiscardedTile = playerTiles[tileIndex];
-            playerTiles[tileIndex] = null;  
+    
+            for (int i = tileIndex; i < playerTiles.length - 1; i++) {
+                playerTiles[i] = playerTiles[i+1];
+            } 
+            
     }
 
     public void displayDiscardInformation() {
