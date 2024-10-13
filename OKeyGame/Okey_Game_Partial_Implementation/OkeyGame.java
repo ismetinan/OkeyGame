@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Random;
 
 public class OkeyGame {
@@ -154,10 +155,10 @@ public class OkeyGame {
      */
     public void pickTileForComputer() {
         boolean useful = false;
-        
-        for(int i=0;i<players[currentPlayerIndex].getTiles().length;i++){
-            Tile[] hand = new Tile[players[currentPlayerIndex].getTiles().length];
-            hand = players[currentPlayerIndex].getTiles();
+        Tile[] hand = new Tile[players[currentPlayerIndex].getTiles().length-1];
+        hand=Arrays.copyOf(players[currentPlayerIndex].getTiles(),players[currentPlayerIndex].getTiles().length-1);        
+        for(int i=0;i<players[currentPlayerIndex].getTiles().length-1&&!useful;i++){
+            
             if(hand[i].canFormChainWith(lastDiscardedTile)){
                 useful = true;
             }
