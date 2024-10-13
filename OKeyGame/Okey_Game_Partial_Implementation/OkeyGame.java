@@ -37,26 +37,30 @@ public class OkeyGame {
      */
     public void distributeTilesToPlayers() {
         shuffleTiles();
-        Player[] players = new Player[4];
         Tile[] restOfTiles = new Tile[55];
-       
+       currentPlayerIndex = 0;
         for(int i=0; i<112; i++){
             int j = 0;
             if(i<15){
             players[currentPlayerIndex].addTile(tiles[i]);
-            currentPlayerIndex++;
+            if(i==14){
+                currentPlayerIndex++;
+            }
             }
             else if(i>=15&&i<29){
             players[currentPlayerIndex].addTile(tiles[i]);
-            currentPlayerIndex++;
+            if(i==28){
+                currentPlayerIndex++;
+            }
             }
             else if(i>=29&&i<43){
             players[currentPlayerIndex].addTile(tiles[i]);
-            currentPlayerIndex++;
+            if(i==42){
+                currentPlayerIndex++;
+            }
             }
             else if(i>=43&&i<57){
             players[currentPlayerIndex].addTile(tiles[i]);
-            currentPlayerIndex++;
             }
             else{
                restOfTiles[j]=tiles[i];
