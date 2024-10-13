@@ -54,11 +54,24 @@ public class Player {
 
     public void sortHand() {
         Arrays.sort(playerTiles, 0, numberOfTiles, new Comparator<Tile>() {
-            @Override
-            public int compare(Tile t1, Tile t2) {
-                if (t1 == null && t2 == null) return 0;
-                if (t1 == null) return 1;
-                if (t2 == null) return -1;
+
+             @Override
+            
+                public int compare(Tile t1, Tile t2) {
+                if (t1 == null && t2 == null) {
+                    return 0;
+                }
+
+                if (t1 == null) {
+                    return 1;
+                }
+
+                if (t2 == null) {
+                    return -1;
+                }
+
+
+
                 return t1.compareTo(t2);
             }
         });
@@ -72,11 +85,14 @@ public class Player {
             while (currentIndex < numberOfTiles && playerTiles[currentIndex].compareTo(t) > 0) {
             currentIndex++;
             }
-                for (int i = numberOfTiles; i > currentIndex; i--) {
-                    playerTiles[i] = playerTiles[i - 1];
-                }
-                playerTiles[currentIndex]=t;
 
+                for (int i = numberOfTiles; i > currentIndex; i--) {
+
+                    playerTiles[i] = playerTiles[i - 1];
+
+                }
+
+                playerTiles[currentIndex]=t;
                 numberOfTiles++;
                
         }
@@ -149,12 +165,4 @@ public class Player {
     public String getName() {
         return playerName;
     }
-<<<<<<< HEAD
 }
-=======
-    public void sortHand(Tile[] t) {
-
-        
-    }
-}
->>>>>>> origin/main
